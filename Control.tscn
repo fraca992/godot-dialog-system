@@ -1,0 +1,128 @@
+[gd_scene load_steps=9 format=3 uid="uid://8yrq38pte48h"]
+
+[ext_resource type="Script" path="res://Control.gd" id="1_kkixe"]
+[ext_resource type="StyleBox" uid="uid://c7khnndt5k0vm" path="res://Themes/Portrait_Background.tres" id="2_dw0ml"]
+[ext_resource type="StyleBox" uid="uid://cwdtlaiebj5fy" path="res://Themes/Portrait_Texture.tres" id="3_l3wbm"]
+[ext_resource type="StyleBox" uid="uid://c7fgymigf7fqv" path="res://Themes/DialogBox_Background.tres" id="4_k2enf"]
+[ext_resource type="Theme" uid="uid://dqjpdtyns8sa3" path="res://Themes/Font.tres" id="5_ju2x5"]
+
+[sub_resource type="Animation" id="Animation_mfa5v"]
+resource_name = "Indicator_Animation"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(3.24901, 0.153893),
+"update": 0,
+"values": [Vector2(928, 145), Vector2(928, 155)]
+}
+
+[sub_resource type="Animation" id="Animation_g2jew"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(928, 136)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dnolg"]
+_data = {
+"Indicator_Animation": SubResource("Animation_mfa5v"),
+"RESET": SubResource("Animation_g2jew")
+}
+
+[node name="DialogSystem" type="CanvasLayer"]
+script = ExtResource("1_kkixe")
+
+[node name="ARC_DialogStructure" type="AspectRatioContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 450.0
+grow_horizontal = 2
+grow_vertical = 2
+ratio = 3.2
+
+[node name="VBC_DialogStructure" type="VBoxContainer" parent="ARC_DialogStructure"]
+layout_mode = 2
+
+[node name="MC_Portrait" type="MarginContainer" parent="ARC_DialogStructure/VBC_DialogStructure"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+
+[node name="ARC_Portrait" type="AspectRatioContainer" parent="ARC_DialogStructure/VBC_DialogStructure/MC_Portrait"]
+layout_mode = 2
+alignment_horizontal = 0
+
+[node name="PC_PortBackground" type="Panel" parent="ARC_DialogStructure/VBC_DialogStructure/MC_Portrait/ARC_Portrait"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_dw0ml")
+
+[node name="PC_PortTexture" type="Panel" parent="ARC_DialogStructure/VBC_DialogStructure/MC_Portrait/ARC_Portrait"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_l3wbm")
+
+[node name="MC_DialogBox" type="MarginContainer" parent="ARC_DialogStructure/VBC_DialogStructure"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PC_DialBackground" type="Panel" parent="ARC_DialogStructure/VBC_DialogStructure/MC_DialogBox"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_k2enf")
+
+[node name="DialogBoxIndicator" type="Polygon2D" parent="ARC_DialogStructure/VBC_DialogStructure/MC_DialogBox/PC_DialBackground"]
+visible = false
+position = Vector2(928, 136)
+scale = Vector2(10.6667, 4.79999)
+polygon = PackedVector2Array(0, 0, 3, 0, 1.5, 5)
+
+[node name="Bouncing" type="AnimationPlayer" parent="ARC_DialogStructure/VBC_DialogStructure/MC_DialogBox/PC_DialBackground/DialogBoxIndicator"]
+libraries = {
+"": SubResource("AnimationLibrary_dnolg")
+}
+
+[node name="DialogName" type="RichTextLabel" parent="ARC_DialogStructure/VBC_DialogStructure/MC_DialogBox/PC_DialBackground"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.314
+offset_left = 11.6129
+offset_top = 9.48936
+offset_right = -11.6135
+offset_bottom = -0.0379181
+theme = ExtResource("5_ju2x5")
+theme_override_font_sizes/normal_font_size = 58
+theme_override_font_sizes/bold_font_size = 58
+theme_override_font_sizes/italics_font_size = 58
+theme_override_font_sizes/bold_italics_font_size = 58
+theme_override_font_sizes/mono_font_size = 58
+text = "NAME GOES HERE"
+autowrap_mode = 0
+
+[node name="DialogText" type="RichTextLabel" parent="ARC_DialogStructure/VBC_DialogStructure/MC_DialogBox/PC_DialBackground"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.332
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = -0.0360031
+offset_right = -10.0
+offset_bottom = -9.0
+theme = ExtResource("5_ju2x5")
+theme_override_font_sizes/normal_font_size = 40
+text = "Dialogue"

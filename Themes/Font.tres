@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dqjpdtyns8sa3"]
+
+[ext_resource type="FontFile" uid="uid://dttnleod1x502" path="res://Fonts/pixelletters-font/Pixellettersfull-BnJ5.ttf" id="1_4u1bu"]
+
+[resource]
+default_font = ExtResource("1_4u1bu")
