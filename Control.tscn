@@ -1,47 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://8yrq38pte48h"]
+[gd_scene load_steps=7 format=3 uid="uid://8yrq38pte48h"]
 
 [ext_resource type="Script" path="res://Control.gd" id="1_kkixe"]
 [ext_resource type="StyleBox" uid="uid://c7khnndt5k0vm" path="res://Themes/Portrait_Background.tres" id="2_dw0ml"]
 [ext_resource type="StyleBox" uid="uid://cwdtlaiebj5fy" path="res://Themes/Portrait_Texture.tres" id="3_l3wbm"]
 [ext_resource type="StyleBox" uid="uid://c7fgymigf7fqv" path="res://Themes/DialogBox_Background.tres" id="4_k2enf"]
 [ext_resource type="Theme" uid="uid://dqjpdtyns8sa3" path="res://Themes/Font.tres" id="5_ju2x5"]
-
-[sub_resource type="Animation" id="Animation_mfa5v"]
-resource_name = "Indicator_Animation"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(3.24901, 0.153893),
-"update": 0,
-"values": [Vector2(928, 145), Vector2(928, 155)]
-}
-
-[sub_resource type="Animation" id="Animation_g2jew"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(928, 136)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dnolg"]
-_data = {
-"Indicator_Animation": SubResource("Animation_mfa5v"),
-"RESET": SubResource("Animation_g2jew")
-}
+[ext_resource type="Texture2D" uid="uid://iuf3tdiqnjn5" path="res://Portraits/indicator.png" id="6_nganh"]
 
 [node name="DialogSystem" type="CanvasLayer"]
 script = ExtResource("1_kkixe")
@@ -84,17 +48,6 @@ size_flags_vertical = 3
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_k2enf")
 
-[node name="DialogBoxIndicator" type="Polygon2D" parent="ARC_DialogStructure/VBC_DialogStructure/MC_DialogBox/PC_DialBackground"]
-visible = false
-position = Vector2(928, 136)
-scale = Vector2(10.6667, 4.79999)
-polygon = PackedVector2Array(0, 0, 3, 0, 1.5, 5)
-
-[node name="Bouncing" type="AnimationPlayer" parent="ARC_DialogStructure/VBC_DialogStructure/MC_DialogBox/PC_DialBackground/DialogBoxIndicator"]
-libraries = {
-"": SubResource("AnimationLibrary_dnolg")
-}
-
 [node name="DialogName" type="RichTextLabel" parent="ARC_DialogStructure/VBC_DialogStructure/MC_DialogBox/PC_DialBackground"]
 layout_mode = 1
 anchors_preset = -1
@@ -126,3 +79,8 @@ offset_bottom = -9.0
 theme = ExtResource("5_ju2x5")
 theme_override_font_sizes/normal_font_size = 40
 text = "Dialogue"
+
+[node name="DialogIndicator" type="Sprite2D" parent="ARC_DialogStructure/VBC_DialogStructure/MC_DialogBox"]
+position = Vector2(1404, 187)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("6_nganh")

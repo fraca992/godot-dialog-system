@@ -52,13 +52,34 @@ func Init_DialogBox():
 	MC_DialogBox.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	# expose margins?
 	
-	var PC_Background = get_node("ARC_DialogStructure/VBC_DialogStructure/MC_Portrait/ARC_Portrait/PC_DialBackground")
+	var PC_Background = get_node("ARC_DialogStructure/VBC_DialogStructure/MC_DialogBox/PC_DialBackground")
 	PC_Background.add_theme_stylebox_override("panel", load("res://Themes/DialogBox_Background.tres"))
 	
 	
 	"""
-	## Initializa DialogBox indicator
+	## Initializa Dialog indicator
 	"""
+	var dialogIndicator = get_node("ARC_DialogStructure/VBC_DialogStructure/MC_DialogBox/DialogIndicator")
+	await get_tree().create_timer(0.05).timeout #Godot applies change in size after one frame: adding a pause here to receive the correct size next. maybe move to right after size change instead?
+	var dialogBoxSize = MC_DialogBox.get_size()
+	
+	# set the scaling for the texture. indicator texture should be square
+	var scalingSize: int
+	if (dialogBoxSize[1] <= dialogBoxSize[0]):
+		#horizontal screen, we scale with y
+		scalingSize = dialogBoxSize[1]
+	else:
+		scalingSize = dialogBoxSize[0]
+	var scaling = ((scalingSize as float / 10) / dialogIndicator.get_rect().size[0]) # scaling the indicator to about 10% of scalingSize
+	dialogIndicator.set_scale(Vector2(scaling,scaling))
+
+	# set the position for the indicator
+	var xPos:= int(0.97 * dialogBoxSize[0])
+	var yPos:= int(0.87 * dialogBoxSize[1])
+	dialogIndicator.set_position(Vector2(xPos,yPos))
+	dialogIndicator.set_z_index(1) #ensures the indicator is always on top
+	
+	# set animation
 	
 	
 	"""
@@ -69,17 +90,17 @@ func Init_DialogBox():
 	"""
 	## Initializa DialogText label
 	"""
-	var TextLabel = get_node("ARC_DialogStructure/VBC_DialogStructure/MC_DialogBox/PC_DialogBox/Text")
+	var TextLabel = get_node("ARC_DialogStructure/VBC_DialogStructure/MC_DialogBox/PC_DialBackground/DialogText")
 	var myFont = load("res://Fonts/pixelletters-font/Pixellettersfull-BnJ5.ttf")
 	await get_tree().create_timer(0.05).timeout #Godot applies change in size after one frame: adding a pause here to receive the correct size next
-	var DialogBoxHeight = TextLabel.size[1]
+	var TextLabelHeight = TextLabel.size[1]
 	var lineNumber = 3 # expose this
 	var dialogueText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sem nunc, dignissim sed elit nec, consectetur mattis ex. Integer maximus nisl dui, at luctus est consequat sed. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent pellentesque metus vitae ante sollicitudin gravida."
 	
 	TextLabel.text = "" # resetting content, this also clears the tag stack
 	TextLabel.scroll_active = false
 	TextLabel.push_context() # pushing tags under a context call, to facilitate popping and switching
-	TextLabel.push_font(myFont, DialogBoxHeight/ lineNumber)
+	TextLabel.push_font(myFont, TextLabelHeight/ lineNumber)
 	TextLabel.add_text(dialogueText)
 
 	# resize bouncing triangle??
