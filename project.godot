@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Dialog Box System"
+config/name="test"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -19,11 +19,6 @@ config/icon="res://icon.svg"
 window/size/viewport_width=1440
 window/size/viewport_height=900
 
-[editor]
+[dotnet]
 
-version_control/plugin_name="GitPlugin"
-version_control/autoload_on_startup=true
-
-[filesystem]
-
-import/blender/enabled=false
+project/assembly_name="test"

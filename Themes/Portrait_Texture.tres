@@ -1,6 +1,6 @@
 [gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://cwdtlaiebj5fy"]
 
-[ext_resource type="Texture2D" uid="uid://brmyt6kmkc2bx" path="res://Portraits/portrait_happy_cropped.png" id="1_yvlu8"]
+[ext_resource type="Texture2D" uid="uid://dw5yu4iepq0is" path="res://Textures/Portraits/portrait_sad_cropped.png" id="1_tqnk7"]
 
 [resource]
-texture = ExtResource("1_yvlu8")
+texture = ExtResource("1_tqnk7")

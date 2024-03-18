@@ -1,0 +1,106 @@
+[gd_scene load_steps=10 format=3 uid="uid://bldsggsad361o"]
+
+[ext_resource type="Script" path="res://dialog_system.gd" id="1_rdxaw"]
+[ext_resource type="StyleBox" uid="uid://c7khnndt5k0vm" path="res://Themes/Portrait_Background.tres" id="2_vcc5p"]
+[ext_resource type="StyleBox" uid="uid://cwdtlaiebj5fy" path="res://Themes/Portrait_Texture.tres" id="3_obr0b"]
+[ext_resource type="Texture2D" uid="uid://c8pymtm6v4rtq" path="res://Textures/Portraits/portrait_happy_cropped.png" id="4_ikywv"]
+[ext_resource type="Texture2D" uid="uid://dw5yu4iepq0is" path="res://Textures/Portraits/portrait_sad_cropped.png" id="5_4ay58"]
+[ext_resource type="StyleBox" uid="uid://c7fgymigf7fqv" path="res://Themes/DialogBox_Background.tres" id="6_0h47q"]
+[ext_resource type="Texture2D" uid="uid://dysvf4e8gnjw1" path="res://Textures/indicator.png" id="7_b6hlx"]
+[ext_resource type="AnimationLibrary" uid="uid://d1lyy0upt8ev6" path="res://Themes/DialogSystem_AnimationLibrary.res" id="9_4e3g1"]
+[ext_resource type="FontFile" uid="uid://c8b1icdcoqgqq" path="res://Fonts/Pixellettersfull-BnJ5.ttf" id="9_d4rkr"]
+
+[node name="DialogSystem" type="CanvasLayer"]
+script = ExtResource("1_rdxaw")
+portraitBackgroundStyle = ExtResource("2_vcc5p")
+portraitTextureStyle = ExtResource("3_obr0b")
+portraits = Array[Texture2D]([ExtResource("4_ikywv"), ExtResource("5_4ay58")])
+dialogBackgroundStyle = ExtResource("6_0h47q")
+indicatorTexture = ExtResource("7_b6hlx")
+nameFont = ExtResource("9_d4rkr")
+textFont = ExtResource("9_d4rkr")
+
+[node name="ARC_MonitorOverlay" type="AspectRatioContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1415.0
+offset_right = 3680.0
+offset_bottom = 1930.0
+ratio = 3.61837
+
+[node name="VBC_DialogBoxStructure" type="VBoxContainer" parent="ARC_MonitorOverlay"]
+layout_mode = 2
+
+[node name="MC_Portrait" type="MarginContainer" parent="ARC_MonitorOverlay/VBC_DialogBoxStructure"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 71
+
+[node name="ARC_Portrait" type="AspectRatioContainer" parent="ARC_MonitorOverlay/VBC_DialogBoxStructure/MC_Portrait"]
+layout_mode = 2
+alignment_horizontal = 0
+
+[node name="PC_PortraitBackground" type="Panel" parent="ARC_MonitorOverlay/VBC_DialogBoxStructure/MC_Portrait/ARC_Portrait"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_vcc5p")
+
+[node name="PC_PortraitTexture" type="Panel" parent="ARC_MonitorOverlay/VBC_DialogBoxStructure/MC_Portrait/ARC_Portrait"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_obr0b")
+
+[node name="MC_DialogBox" type="MarginContainer" parent="ARC_MonitorOverlay/VBC_DialogBoxStructure"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 51
+theme_override_constants/margin_right = 51
+theme_override_constants/margin_bottom = 51
+
+[node name="PC_DialogBackground" type="Panel" parent="ARC_MonitorOverlay/VBC_DialogBoxStructure/MC_DialogBox"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("6_0h47q")
+
+[node name="MC_Name" type="MarginContainer" parent="ARC_MonitorOverlay/VBC_DialogBoxStructure/MC_DialogBox/PC_DialogBackground"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.3
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TextName" type="RichTextLabel" parent="ARC_MonitorOverlay/VBC_DialogBoxStructure/MC_DialogBox/PC_DialogBackground/MC_Name"]
+layout_mode = 2
+scroll_active = false
+autowrap_mode = 0
+
+[node name="MC_Dialog" type="MarginContainer" parent="ARC_MonitorOverlay/VBC_DialogBoxStructure/MC_DialogBox/PC_DialogBackground"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.3
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TextDialog" type="RichTextLabel" parent="ARC_MonitorOverlay/VBC_DialogBoxStructure/MC_DialogBox/PC_DialogBackground/MC_Dialog"]
+layout_mode = 2
+scroll_active = false
+
+[node name="DialogIndicator" type="Sprite2D" parent="ARC_MonitorOverlay/VBC_DialogBoxStructure/MC_DialogBox"]
+z_index = 1
+position = Vector2(4966, 600.766)
+scale = Vector2(0.275781, 0.275781)
+texture = ExtResource("7_b6hlx")
+
+[node name="IndicatorPlayer" type="AnimationPlayer" parent="ARC_MonitorOverlay/VBC_DialogBoxStructure/MC_DialogBox/DialogIndicator"]
+libraries = {
+"DialogSystem_AnimationLibrary": ExtResource("9_4e3g1")
+}
