@@ -165,7 +165,7 @@ func Init_DialogTextLabels(_p_MC_Background): #remove parameter?
 	textLabel.scroll_active = false
 	textLabel.set_autowrap_mode(TextServer.AUTOWRAP_WORD_SMART)
 	
-	# pushing initial name context
+	# pushing initial dialog context
 	var textLabelHeight = textLabel.size[1]
 	textLabel.clear() # altough official documentation says that clear does not clear text, it is not true, at least with add_text function; editing the text property to empty string ("") does not clear the text. did not test if AUTOWRAP fault.
 	textLabel.push_context() # pushing tags under a context call, to facilitate popping and switching
@@ -185,7 +185,7 @@ func Init_DialogTextLabels(_p_MC_Background): #remove parameter?
 			printerr("While cropping dialog text couldn't find \".\" or \",\". used space instead. Consider increasing number of lines or rewriting dialog")
 		else:
 			splitChar = ""
-			printerr("what the heck (wo)man/enby...") #TODO: move the printing error after while
+			printerr("what the heck (wo)man/enby...") #TODO: move the printing error after while so prints only once
 		
 		var splitText = new_DialogText.rsplit(splitChar, false, 1)
 		new_DialogText = splitText[0]
