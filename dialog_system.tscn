@@ -16,18 +16,18 @@ portraitBackgroundStyle = ExtResource("2_vcc5p")
 portraitTextureStyle = ExtResource("3_obr0b")
 portraits = Array[Texture2D]([ExtResource("4_ikywv"), ExtResource("5_4ay58")])
 dialogBackgroundStyle = ExtResource("6_0h47q")
+dialogBoxMargin = 0.01
 indicatorTexture = ExtResource("7_b6hlx")
 nameFont = ExtResource("9_d4rkr")
 textFont = ExtResource("9_d4rkr")
+dialogText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rhoncus ultrices libero malesuada maximus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum ullamcorper sodales libero, eget varius lorem maximus at"
 
 [node name="ARC_MonitorOverlay" type="AspectRatioContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 1415.0
-offset_right = 3680.0
-offset_bottom = 1930.0
-ratio = 3.61837
+offset_top = 450.0
+ratio = 3.2
 
 [node name="VBC_DialogBoxStructure" type="VBoxContainer" parent="ARC_MonitorOverlay"]
 layout_mode = 2
@@ -35,7 +35,7 @@ layout_mode = 2
 [node name="MC_Portrait" type="MarginContainer" parent="ARC_MonitorOverlay/VBC_DialogBoxStructure"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 71
+theme_override_constants/margin_left = 20
 
 [node name="ARC_Portrait" type="AspectRatioContainer" parent="ARC_MonitorOverlay/VBC_DialogBoxStructure/MC_Portrait"]
 layout_mode = 2
@@ -52,9 +52,9 @@ theme_override_styles/panel = ExtResource("3_obr0b")
 [node name="MC_DialogBox" type="MarginContainer" parent="ARC_MonitorOverlay/VBC_DialogBoxStructure"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 51
-theme_override_constants/margin_right = 51
-theme_override_constants/margin_bottom = 51
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 14
 
 [node name="PC_DialogBackground" type="Panel" parent="ARC_MonitorOverlay/VBC_DialogBoxStructure/MC_DialogBox"]
 layout_mode = 2
@@ -96,8 +96,8 @@ scroll_active = false
 
 [node name="DialogIndicator" type="Sprite2D" parent="ARC_MonitorOverlay/VBC_DialogBoxStructure/MC_DialogBox"]
 z_index = 1
-position = Vector2(4966, 600.766)
-scale = Vector2(0.275781, 0.275781)
+position = Vector2(1396, 189.733)
+scale = Vector2(0.0871094, 0.0871094)
 texture = ExtResource("7_b6hlx")
 
 [node name="IndicatorPlayer" type="AnimationPlayer" parent="ARC_MonitorOverlay/VBC_DialogBoxStructure/MC_DialogBox/DialogIndicator"]
