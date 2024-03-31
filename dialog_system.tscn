@@ -96,7 +96,7 @@ scroll_active = false
 
 [node name="DialogIndicator" type="Sprite2D" parent="ARC_MonitorOverlay/VBC_DialogBoxStructure/MC_DialogBox"]
 z_index = 1
-position = Vector2(1396, 189.733)
+position = Vector2(1396.8, 178.4)
 scale = Vector2(0.0871094, 0.0871094)
 texture = ExtResource("7_b6hlx")
 

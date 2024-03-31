@@ -136,28 +136,28 @@ func Init_DialogIndicator(p_MC_DialogBox : MarginContainer) -> void:
 	dialogIndicator.set_z_index(1) #ensures the indicator is always on top
 	
 	## set animation
-	#var indicatorAnimationPlayer : AnimationPlayer = get_node("ARC_MonitorOverlay/VBC_DialogBoxStructure/MC_DialogBox/DialogIndicator/IndicatorPlayer")
-	#var library : AnimationLibrary = load("res://Themes/DialogSystem_AnimationLibrary.res")
-	#var bouncingAnimation := Animation.new()
-	#var trackIndex : int = bouncingAnimation.add_track(Animation.TYPE_VALUE)
-	#var bounce = 0.03 * dialogBoxSize[1]
-	#
-	#bouncingAnimation.track_set_path(trackIndex, ".:position:y")
-	#bouncingAnimation.track_insert_key(trackIndex,0,dialogIndicator.get_position()[1],1)
-	#bouncingAnimation.track_insert_key(trackIndex,0.5,dialogIndicator.get_position()[1] + bounce,1)
-	#bouncingAnimation.track_insert_key(trackIndex,1,dialogIndicator.get_position()[1],0.25)
-	#bouncingAnimation.set_loop_mode(Animation.LOOP_PINGPONG)
-	#library.add_animation("bounce",bouncingAnimation) # the library still needs to be added as a resource
-	#indicatorAnimationPlayer.play("DialogSystem_AnimationLibrary/bounce")
+	var indicatorAnimationPlayer : AnimationPlayer = get_node("ARC_MonitorOverlay/VBC_DialogBoxStructure/MC_DialogBox/DialogIndicator/IndicatorPlayer")
+	var library : AnimationLibrary = load("res://Themes/DialogSystem_AnimationLibrary.res")
+	var bouncingAnimation := Animation.new()
+	var trackIndex : int = bouncingAnimation.add_track(Animation.TYPE_VALUE)
+	var bounce : float = 0.03 * dialogBoxSize[1]
+	
+	bouncingAnimation.track_set_path(trackIndex, ".:position:y")
+	bouncingAnimation.track_insert_key(trackIndex,0,dialogIndicator.get_position()[1],0.5)
+	bouncingAnimation.track_insert_key(trackIndex,0.5,dialogIndicator.get_position()[1] + bounce,-2)
+	bouncingAnimation.set_length(1)
+	bouncingAnimation.set_loop_mode(Animation.LOOP_LINEAR)
+	library.add_animation("bounce",bouncingAnimation) # the library still needs to be added as a resource
+	indicatorAnimationPlayer.play("DialogSystem_AnimationLibrary/bounce")
 	
 	await get_tree().create_timer(0.05).timeout #Godot applies change in size after one frame: adding a pause here to receive the correct size next.
 	return
 
 #Initialize the text labels
-func Init_DialogTextLabels():
+func Init_DialogTextLabels() -> void:
 	## Initialize TextName label
 	# initial settings
-	var nameLabel = get_node("ARC_MonitorOverlay/VBC_DialogBoxStructure/MC_DialogBox/PC_DialogBackground/MC_Name/TextName")
+	var nameLabel : RichTextLabel = get_node("ARC_MonitorOverlay/VBC_DialogBoxStructure/MC_DialogBox/PC_DialogBackground/MC_Name/TextName")
 	nameLabel.scroll_active = false
 	nameLabel.set_autowrap_mode(TextServer.AUTOWRAP_OFF)
 	
@@ -166,16 +166,16 @@ func Init_DialogTextLabels():
 	
 	##Initializa TextDialog label
 	# initial settings
-	var textLabel = get_node("ARC_MonitorOverlay/VBC_DialogBoxStructure/MC_DialogBox/PC_DialogBackground/MC_Dialog/TextDialog")
+	var textLabel : RichTextLabel = get_node("ARC_MonitorOverlay/VBC_DialogBoxStructure/MC_DialogBox/PC_DialogBackground/MC_Dialog/TextDialog")
 	textLabel.scroll_active = false
 	textLabel.set_autowrap_mode(TextServer.AUTOWRAP_WORD_SMART)
 	
 	# pushing initial dialog context
-	var dialogTextSize = textLabel.size[1] / lineNumber
+	var dialogTextSize : int = int(textLabel.size[1] / lineNumber)
 	PrintLabel(textLabel, textFont, dialogTextSize, dialogText)
 	
 	# splitting text if too long
-	var splitChar = "_"
+	var splitChar : String = "_"
 	while textLabel.get_line_count() > lineNumber:
 		if dialogText.contains("."):
 			splitChar = "."
@@ -200,7 +200,7 @@ func Init_DialogTextLabels():
 	return
 
 #Util to print text to label
-func PrintLabel(label:RichTextLabel, font:FontFile, size:int, text:String):
+func PrintLabel(label:RichTextLabel, font:FontFile, size:int, text:String) -> void:
 	label.clear() # altough official documentation says that clear does not clear text, it is not true, at least with add_text function; editing the text property to empty string ("") does not clear the text. did not test if AUTOWRAP fault.
 	label.push_context()
 	label.push_font(font, size)
